@@ -74,6 +74,10 @@ val liquidGlassNavPatch = bytecodePatch(
 ) {
     compatibleWith(STRAVA_GLASS_COMPATIBILITY)
 
+    // The glass tweaks live in the Extra Settings screen; selecting
+    // Liquid Glass always brings that screen (and its resources).
+    dependsOn(extraSettingsPatch)
+
     extendWith("extensions/extension.mpe")
 
     execute {

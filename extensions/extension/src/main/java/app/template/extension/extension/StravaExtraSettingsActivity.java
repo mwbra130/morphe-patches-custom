@@ -442,7 +442,7 @@ public final class StravaExtraSettingsActivity extends Activity {
         row.addView(label);
         SeekBar seek = new SeekBar(this);
         seek.setMax(75);
-        int current = prefs.getInt("morphe.glass.opacity", 72);
+        int current = prefs.getInt("morphe.glass.opacity", 45);
         current = Math.max(20, Math.min(95, current));
         seek.setProgress(current - 20);
         label.setText("Tint opacity — " + current + "%");
