@@ -14,6 +14,7 @@ import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -220,6 +221,7 @@ public final class StravaExtraSettingsActivity extends Activity {
 
         buildUpsellSection(root);
         buildRecordingSection(root);
+        buildGlassSection(root);
         buildAccentSection(root);
         buildAboutSection(root);
 
@@ -417,12 +419,68 @@ public final class StravaExtraSettingsActivity extends Activity {
         root.addView(divider());
     }
 
+    // ── Liquid Glass (runtime — GlassNav reads these prefs at startup) ────
+
+    private void buildGlassSection(LinearLayout root) {
+        root.addView(header("Liquid Glass"));
+
+        switchRow(root, "Liquid Glass navigation",
+                "morphe.glass.enabled", true);
+        switchRow(root, "Floating pill (off = docked bar)",
+                "morphe.glass.floating", true);
+        switchRow(root, "Blur backdrop",
+                "morphe.glass.blur", true);
+
+        // Tint opacity slider: SeekBar progress 0..75 maps to 20..95%.
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.VERTICAL);
+        row.setPadding(dp(4), dp(16), dp(4), dp(16));
+        final TextView label = new TextView(this);
+        label.setTextSize(16);
+        label.setTextColor(textColorPrimary);
+        label.setPadding(dp(8), 0, dp(16), dp(8));
+        row.addView(label);
+        SeekBar seek = new SeekBar(this);
+        seek.setMax(75);
+        int current = prefs.getInt("morphe.glass.opacity", 72);
+        current = Math.max(20, Math.min(95, current));
+        seek.setProgress(current - 20);
+        label.setText("Tint opacity — " + current + "%");
+        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
+                label.setText("Tint opacity — " + (progress + 20) + "%");
+                if (fromUser) {
+                    prefs.edit().putInt("morphe.glass.opacity", progress + 20).apply();
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar bar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar bar) {
+            }
+        });
+        row.addView(seek);
+        root.addView(row);
+        root.addView(divider());
+
+        TextView note = new TextView(this);
+        note.setText("Glass changes apply on next app start.");
+        note.setTextSize(13);
+        note.setTextColor(textColorSecondary);
+        note.setPadding(dp(12), dp(8), dp(12), 0);
+        root.addView(note);
+    }
+
     private void buildAboutSection(LinearLayout root) {
         root.addView(header("About"));
         String text = "Morphe Extra Settings\n"
                 + "Patch set 1.23.0-strava.2\n"
                 + "Active: Unlock Premium, OTP password login, upsell removal,\n"
-                + "telemetry removal, signature spoof.\n"
+                + "telemetry removal, signature spoof, Liquid Glass navigation.\n"
                 + "Toggles apply immediately — no restart needed.\n"
                 + "Strava " + versionName();
         TextView tv = new TextView(this);
