@@ -10,16 +10,19 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMuta
 import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 
-// Liquid Glass is audited against 486.9 only: the nav-controller class
-// below carries an obfuscated name that can move between versions, so
-// this patch deliberately does not claim the wider Strava target list.
-private val STRAVA_4869_COMPATIBILITY = Compatibility(
+// Liquid Glass is audited against the 486.x hotfix line: the
+// nav-controller class below carries an obfuscated name that can move
+// between major versions, so this patch deliberately does not claim
+// the wider Strava target list. If a build's mapping differs, the
+// patch fails loudly at patch time instead of breaking the app.
+private val STRAVA_GLASS_COMPATIBILITY = Compatibility(
     name = "Strava",
     packageName = "com.strava",
     apkFileType = ApkFileType.APKS,
     appIconColor = 0xFC4C02,
     targets = listOf(
         AppTarget(version = "486.9", versionCode = 12400193),
+        AppTarget(version = "486.11", versionCode = 12400195),
     ),
 )
 
@@ -31,7 +34,7 @@ private const val GLASS_CLASS =
     "Lapp/template/extension/extension/GlassNav;"
 
 /**
- * Liquid Glass bottom navigation (486.9).
+ * Liquid Glass bottom navigation (486.9 / 486.11).
  *
  * Strava's main screen carries two bottom bars in the same layout
  * slot — the classic Material BottomNavigationView and a ComposeView —
@@ -65,7 +68,7 @@ val liquidGlassNavPatch = bytecodePatch(
         "effect possible.",
     default = true,
 ) {
-    compatibleWith(STRAVA_4869_COMPATIBILITY)
+    compatibleWith(STRAVA_GLASS_COMPATIBILITY)
 
     extendWith("extensions/extension.mpe")
 
