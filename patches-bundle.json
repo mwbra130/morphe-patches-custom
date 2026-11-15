@@ -1,7 +1,7 @@
 {
- "created_at": "2026-11-15T21:44:47",
+ "created_at": "2026-11-15T22:00:25",
  "description": "Liquid Glass navigation for Strava (floating glass pill, Extra Settings tweaks) on top of madushas 0.7.0.",
- "download_url": "https://github.com/mwbra130/morphe-patches-custom/releases/download/v0.8.0/patches-0.8.0.mpp",
+ "download_url": "https://github.com/mwbra130/morphe-patches-custom/releases/download/v0.8.1/patches-0.8.1.mpp",
  "signature_download_url": "",
- "version": "0.8.0"
+ "version": "0.8.1"
 }
