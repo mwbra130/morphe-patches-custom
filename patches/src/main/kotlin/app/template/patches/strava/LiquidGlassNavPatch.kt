@@ -42,10 +42,14 @@ private const val GLASS_CLASS =
  * lazy Boolean) picks which one is shown. The Compose bar paints its
  * own opaque background, so it cannot be glassed from outside.
  *
- * 1. Force the classic bar: a.b() returns true from its first
- *    instruction. The classic path is fully wired in 486.9 (menu,
- *    listeners, tints), not dead code. Trade-off: Compose-bar-only
- *    behavior (the expandable Record create menu) is lost.
+ * 1. Force the classic bar: a.b() is the Compose-bar flag, so it
+ *    returns FALSE from its first instruction. Verified against the
+ *    486.11 dex: BottomNavigationActivity.onCreate only binds the
+ *    classic BottomNavigationView into the nav controller on the
+ *    b()==false path; b()==true selects the ComposeView bar. The
+ *    classic path is fully wired (menu, listeners, tints), not dead
+ *    code. Trade-off: Compose-bar-only behavior (the expandable
+ *    Record create menu) is lost.
  *
  * 2. Wrap BottomNavigationActivity.onCreate (rename + wrapper, the
  *    same pattern ExtraSettingsPatch uses for SettingsFragment) and
@@ -85,7 +89,7 @@ val liquidGlassNavPatch = bytecodePatch(
         switch.addInstructions(
             0,
             """
-                const/4 v0, 0x1
+                const/4 v0, 0x0
                 return v0
             """.trimIndent(),
         )
