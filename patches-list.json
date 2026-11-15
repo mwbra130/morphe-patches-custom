@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -1818,7 +1818,9 @@
       "description": "Turns Strava's bottom bar into a floating Liquid Glass pill: detached from the screen edges, live blurred backdrop with a translucent tint, content scrolling underneath it, like the current YouTube and Proton VPN bars. Tweak it in Extra Settings. Uses Strava's classic bottom bar to make the effect possible.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "BytecodePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "com.strava",
