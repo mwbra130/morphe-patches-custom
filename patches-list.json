@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -1835,6 +1835,18 @@
                 "ARMEABI_V7A": 12400193,
                 "X86_64": 12400193,
                 "X86": 12400193
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "486.11",
+              "versionCodes": {
+                "ARM64_V8A": 12400195,
+                "ARMEABI_V7A": 12400195,
+                "X86_64": 12400195,
+                "X86": 12400195
               },
               "isExperimental": false,
               "minSdk": null,
