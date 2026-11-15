@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -1803,6 +1803,38 @@
                 "ARMEABI_V7A": 1130100213,
                 "X86_64": 1130100213,
                 "X86": 1130100213
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Liquid Glass navigation",
+      "description": "Turns Strava's bottom bar into a floating Liquid Glass pill: detached from the screen edges, live blurred backdrop with a translucent tint, content scrolling underneath it, like the current YouTube and Proton VPN bars. Tweak it in Extra Settings. Uses Strava's classic bottom bar to make the effect possible.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.strava",
+          "name": "Strava",
+          "description": null,
+          "apkFileType": "APKS",
+          "appIconColor": "#FC4C02",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "486.9",
+              "versionCodes": {
+                "ARM64_V8A": 12400193,
+                "ARMEABI_V7A": 12400193,
+                "X86_64": 12400193,
+                "X86": 12400193
               },
               "isExperimental": false,
               "minSdk": null,
