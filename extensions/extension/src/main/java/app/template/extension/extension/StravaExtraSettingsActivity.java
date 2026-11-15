@@ -219,9 +219,9 @@ public final class StravaExtraSettingsActivity extends Activity {
         scroll.addView(root, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
+        buildGlassSection(root);
         buildUpsellSection(root);
         buildRecordingSection(root);
-        buildGlassSection(root);
         buildAccentSection(root);
         buildAboutSection(root);
 
